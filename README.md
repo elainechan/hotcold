@@ -3,4 +3,4 @@
 - [x] NumberForm
 - [x] Count
 - [x] Records
-- [ ] NewGame
+- [x] NewGame

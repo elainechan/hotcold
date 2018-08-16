@@ -5,6 +5,7 @@ import Feedback from './components/Feedback';
 import NumberForm from './components/NumberForm';
 import Count from './components/Count';
 import Records from './components/Records';
+import NewGame from './components/NewGame';
 
 class App extends Component {
   constructor(props) {
@@ -26,13 +27,18 @@ class App extends Component {
   componentDidMount() {
     this.getRandomNum();
   }
+
+  componentWillUnmount() {}
+
+  // get random number and store in localstorage
   getRandomNum() {
     const randNum = Math.round(Math.random()*100);
     this.setState({answer: randNum});
+    localStorage.setItem('answerKey', randNum);
   }
   // increment counter on NumberForm submit
   incrementCounter() {
-    this.setState({counter: this.state.count + 1})
+    this.setState({counter: this.state.counter + 1})
   }
 
   onGuess() {
@@ -41,7 +47,10 @@ class App extends Component {
     this.giveFeedback();
   }
   // compare num on submit
-  compare() {}
+  compare() {
+    const answerKey = localStorage.getItem('answerKey');
+
+  }
   
   // setState feedback on compare
   giveFeedback() {}
@@ -51,10 +60,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Hot or Cold</h1>
+          <NewGame />
         </header>
         <Feedback feedback={this.state.feedback} />
-        <NumberForm onGuess={guess => this.setState({records: [this.state.records, ...guess]})} />
-        <Count count={this.state.count} />
+        <NumberForm onGuess={guess => this.setState({records: [...this.state.records, ...guess]})} />
+        <Count count={this.state.counter} />
         <Records records={this.state.records} />
       </div>
     );

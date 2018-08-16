@@ -16,7 +16,7 @@ export default class NumberInput extends React.Component {
 
 	render() {
 		return(
-			<form onSubmit={(e) => this.onGuess(e)}>
+			<form onSubmit={(e) => this.onUserGuess(e)}>
 				<input
 					type="number"
 					placeholder="Enter a number"
